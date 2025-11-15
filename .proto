@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package froggy;
+
+service FroggyGame {
+  rpc registrarJugador (RegistroRequest) returns (RegistroResponse) {}
+  rpc moverJugador (MovimientoRequest) returns (MovimientoResponse) {}
+  rpc estadoJugador (EstadoRequest) returns (EstadoResponse) {}
+}
+
+message RegistroRequest {
+  string nombre = 1;
+  string emoji = 2;
+}
+
+message RegistroResponse {
+  int32 id_jugador = 1;
+}
+
+message MovimientoRequest {
+  int32 id_jugador = 1;
+  Direccion movimiento = 2;
+}
+
+message MovimientoResponse {
+  bool exito = 1;
+}
+
+message EstadoRequest {
+  int32 id_jugador = 1;
+}
+
+message EstadoResponse {
+  string estado = 1;  // VIVO, CRUZO, ATROPELLADO
+  string mensaje = 2;
+}
+
+enum Direccion {
+  ARRIBA = 0;
+  ABAJO = 1;
+  IZQUIERDA = 2;
+  DERECHA = 3;
+}
